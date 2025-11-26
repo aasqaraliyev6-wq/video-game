@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Romantic Interactive Story</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#0a0a0a;color:#fff;margin:0;padding:20px;text-align:center}
+    h1{color:#ff4d88}
+    #videoContainer{max-width:900px;margin:20px auto;border-radius:12px;overflow:hidden;box-shadow:0 0 20px rgba(255,0,80,0.25)}
+    video{width:100%;height:auto;display:block}
+    #choices{margin-top:18px;display:none}
+    button{background:#ff2e63;color:#fff;padding:12px 20px;margin:8px;border:none;border-radius:10px;cursor:pointer;font-size:16px}
+    button:hover{transform:scale(1.04)}
+  </style>
+</head>
+<body>
+  <h1>Romantic Interactive Story</h1>
+  <p>Har bir tanlov voqeani o'zgartiradi — boshlash uchun video tugashini kuting.</p>
+
+  <div id="videoContainer">
+    <video id="gameVideo" controls playsinline></video>
+  </div>
+
+  <div id="choices"></div>
+
+  <script>
+    // O'zingizni USERNAME va REPO bilan almashtiring:
+    const base = "https://<GITHUB_USERNAME>.github.io/<REPO_NAME>/videos/";
+
+    const nodes = {
+      start: { url: base + "intro.mp4", text: "Uchrashuv kechasi. U sizga kulib qarab turibdi.", choices:[
+        {text:"Tabassum bilan qarshi olish", next:"scene1"},
+        {text:"Hazil qilib gap boshlash", next:"scene2"}
+      ]},
+
+      scene1: { url: base + "scene1.mp4", text: "U sizga yaqinlashadi.", choices:[
+        {text:"Uning qo'lidan ushlash", next:"scene3"},
+        {text:"Ko'zlariga qarash", next:"scene4"}
+      ]},
+
+      scene2: { url: base + "scene2.mp4", text: "Kayfiyat ko'tarildi.", choices:[
+        {text:"Birgalikda yurishni taklif qilish", next:"scene3"},
+        {text:"Hazilni davom ettirish", next:"scene4"}
+      ]},
+
+      scene3: { url: base + "scene3.mp4", text: "U qo'lingizni ushladi.", choices:[
+        {text:"Sevgi izhor qilish", next:"ending_kiss"},
+        {text:"Uning yuzidan silash", next:"ending_soft"}
+      ]},
+
+      scene4: { url: base + "scene4.mp4", text: "Samimiy atmosfera.", choices:[
+        {text:"Qo'shiq aytish", next:"ending_music"},
+        {text:"Yaqinlashish", next:"ending_kiss"}
+      ]},
+
+      ending_kiss: { url: base + "ending_kiss.mp4", text: "Lablar uchrashdi. Romantik yakun.", choices: [] },
+      ending_soft: { url: base + "ending_soft.mp4", text: "Muloyim yakun.", choices: [] },
+      ending_music: { url: base + "ending_music.mp4", text: "U qo'shig'ingizni yoqtirdi.", choices: [] }
+    };
+
+    const video = document.getElementById("gameVideo");
+    const choicesDiv = document.getElementById("choices");
+
+    function loadNode(id){
+      const node = nodes[id];
+      video.src = node.url;
+      video.play().catch(()=>{ /* autoplay blocked — user must click play */ });
+      if(node.choices.length>0){
+        video.onended = ()=> showChoices(node);
+      } else {
+        choicesDiv.style.display = "none";
+        video.onended = null;
+      }
+    }
+
+    function showChoices(node){
+      choicesDiv.innerHTML = <p style="font-size:18px;margin-bottom:10px">${node.text}</p>;
+      choicesDiv.style.display = "block";
+      node.choices.forEach(ch=>{
+        const b = document.createElement("button");
+        b.textContent = ch.text;
+        b.onclick = ()=>{ choicesDiv.style.display="none"; loadNode(ch.next); };
+        choicesDiv.appendChild(b);
+      });
+    }
+
+    // Boshlang
+    loadNode("start");
+  </script>
+</body>
+</html>
