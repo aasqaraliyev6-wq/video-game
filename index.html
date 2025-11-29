@@ -55,18 +55,17 @@
 </head>
 <body>
   <h1>Romantik Interaktiv Hikoya</h1>
-  <p>Har bir tanlov voqeani o'zgartiradi — boshlash uchun video tugashini kuting. (Videolar bepul sample'lar, romantik emas — keyin almashtiring!)</p>
+  <p>Har bir tanlov voqeani o'zgartiradi — boshlash uchun video tugashini kuting. (Endi romantik videolar!)</p>
   <div id="errorMessage">Video yuklanmadi. Iltimos, sahifani qayta yuklang yoki internetni tekshiring.</div>
   <div id="videoContainer">
     <video id="gameVideo" controls playsinline></video>
   </div>
   <div id="choices"></div>
   <script>
-    // Bepul sample videolar uchun base (Google CDN):
-    const base = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/";
+    // Bepul romantik videolar (Pixabay va Google sample'lar):
     const nodes = {
       start: { 
-        url: base + "BigBuckBunny.mp4", 
+        url: "https://cdn.pixabay.com/video/2023/11/23/190378-887815761_large.mp4", 
         text: "Uchrashuv kechasi. U sizga kulib qarab turibdi.", 
         choices: [
           { text: "Tabassum bilan qarshi olish", next: "scene1" },
@@ -74,7 +73,7 @@
         ]
       },
       scene1: { 
-        url: base + "ElephantsDream.mp4", 
+        url: "https://cdn.pixabay.com/video/2022/10/14/134914-760686094_large.mp4", 
         text: "U sizga yaqinlashadi.", 
         choices: [
           { text: "Uning qo'lidan ushlash", next: "scene3" },
@@ -82,7 +81,7 @@
         ]
       },
       scene2: { 
-        url: base + "ForBiggerBlazes.mp4", 
+        url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", 
         text: "Kayfiyat ko'tarildi.", 
         choices: [
           { text: "Birgalikda yurishni taklif qilish", next: "scene3" },
@@ -90,7 +89,7 @@
         ]
       },
       scene3: { 
-        url: base + "ForBiggerEscapes.mp4", 
+        url: "https://cdn.pixabay.com/video/2024/11/27/243647_large.mp4", 
         text: "U qo'lingizni ushladi.", 
         choices: [
           { text: "Sevgi izhor qilish", next: "ending_kiss" },
@@ -98,7 +97,7 @@
         ]
       },
       scene4: { 
-        url: base + "ForBiggerFun.mp4", 
+        url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", 
         text: "Samimiy atmosfera.", 
         choices: [
           { text: "Qo'shiq aytish", next: "ending_music" },
@@ -106,17 +105,17 @@
         ]
       },
       ending_kiss: { 
-        url: base + "ForBiggerJoyrides.mp4", 
+        url: "https://cdn.pixabay.com/video/2025/03/18/265648_large.mp4", 
         text: "Lablar uchrashdi. Romantik yakun.", 
         choices: [] 
       },
       ending_soft: { 
-        url: base + "ForBiggerMeltdowns.mp4", 
+        url: "https://cdn.pixabay.com/video/2022/10/14/134914-760686094_large.mp4", 
         text: "Muloyim yakun.", 
         choices: [] 
       },
       ending_music: { 
-        url: base + "Sintel.mp4", 
+        url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", 
         text: "U qo'shig'ingizni yoqtirdi.", 
         choices: [] 
       }
@@ -133,10 +132,9 @@
         return;
       }
       video.src = node.url;
-      video.load(); // Ensure reload
+      video.load();
       video.play().catch((e) => {
         console.log("Avtoplay bloklandi: ", e);
-        // User can click play manually
       });
       video.onloadeddata = () => {
         errorDiv.style.display = "none";
@@ -149,7 +147,6 @@
       } else {
         choicesDiv.style.display = "none";
         video.onended = null;
-        // Optional: Show ending text after video ends
         video.onended = () => {
           choicesDiv.innerHTML = `<p style="font-size:18px;margin-bottom:10px">${node.text}</p>`;
           choicesDiv.style.display = "block";
@@ -160,7 +157,6 @@
     function showChoices(node) {
       choicesDiv.innerHTML = `<p style="font-size:18px;margin-bottom:10px">${node.text}</p>`;
       choicesDiv.style.display = "block";
-      // Clear previous buttons
       while (choicesDiv.children.length > 1) {
         choicesDiv.removeChild(choicesDiv.lastChild);
       }
