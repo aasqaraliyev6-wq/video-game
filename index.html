@@ -55,17 +55,17 @@
 </head>
 <body>
   <h1>Romantik Interaktiv Hikoya</h1>
-  <p>Har bir tanlov voqeani o'zgartiradi — boshlash uchun video tugashini kuting. (Endi romantik videolar!)</p>
+  <p>Har bir tanlov voqeani o'zgartiradi — boshlash uchun video tugashini kuting. (Endi haqiqiy romantik sevgi videolari!)</p>
   <div id="errorMessage">Video yuklanmadi. Iltimos, sahifani qayta yuklang yoki internetni tekshiring.</div>
   <div id="videoContainer">
     <video id="gameVideo" controls playsinline></video>
   </div>
   <div id="choices"></div>
   <script>
-    // Bepul romantik videolar (Pixabay va Google sample'lar):
+    // Haqiqiy romantik videolar (Pixabay CDN, bepul va real):
     const nodes = {
       start: { 
-        url: "https://cdn.pixabay.com/video/2023/11/23/190378-887815761_large.mp4", 
+        url: "https://cdn.pixabay.com/video/2019/01/04/20454-309694522_large.mp4", 
         text: "Uchrashuv kechasi. U sizga kulib qarab turibdi.", 
         choices: [
           { text: "Tabassum bilan qarshi olish", next: "scene1" },
@@ -73,7 +73,7 @@
         ]
       },
       scene1: { 
-        url: "https://cdn.pixabay.com/video/2022/10/14/134914-760686094_large.mp4", 
+        url: "https://cdn.pixabay.com/video/2020/08/25/48069-451432123_large.mp4", 
         text: "U sizga yaqinlashadi.", 
         choices: [
           { text: "Uning qo'lidan ushlash", next: "scene3" },
@@ -81,7 +81,7 @@
         ]
       },
       scene2: { 
-        url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", 
+        url: "https://cdn.pixabay.com/video/2021/07/30/83281-584710664_large.mp4", 
         text: "Kayfiyat ko'tarildi.", 
         choices: [
           { text: "Birgalikda yurishni taklif qilish", next: "scene3" },
@@ -89,7 +89,7 @@
         ]
       },
       scene3: { 
-        url: "https://cdn.pixabay.com/video/2024/11/27/243647_large.mp4", 
+        url: "https://cdn.pixabay.com/video/2021/04/13/70940-536644186_large.mp4", 
         text: "U qo'lingizni ushladi.", 
         choices: [
           { text: "Sevgi izhor qilish", next: "ending_kiss" },
@@ -97,7 +97,7 @@
         ]
       },
       scene4: { 
-        url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", 
+        url: "https://cdn.pixabay.com/video/2020/06/16/42189-429661428_large.mp4", 
         text: "Samimiy atmosfera.", 
         choices: [
           { text: "Qo'shiq aytish", next: "ending_music" },
@@ -105,17 +105,17 @@
         ]
       },
       ending_kiss: { 
-        url: "https://cdn.pixabay.com/video/2025/03/18/265648_large.mp4", 
+        url: "https://cdn.pixabay.com/video/2021/07/30/83281-584710664_large.mp4", 
         text: "Lablar uchrashdi. Romantik yakun.", 
         choices: [] 
       },
       ending_soft: { 
-        url: "https://cdn.pixabay.com/video/2022/10/14/134914-760686094_large.mp4", 
+        url: "https://cdn.pixabay.com/video/2019/01/04/20454-309694522_large.mp4", 
         text: "Muloyim yakun.", 
         choices: [] 
       },
       ending_music: { 
-        url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", 
+        url: "https://cdn.pixabay.com/video/2020/08/25/48069-451432123_large.mp4", 
         text: "U qo'shig'ingizni yoqtirdi.", 
         choices: [] 
       }
